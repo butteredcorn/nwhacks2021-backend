@@ -1,0 +1,6 @@
+node_modules
+.env
+debug.log
+.DS_Store
+lustr-c26ab-firebase-adminsdk-981nk-c0a52f2f83.json
+package-lock.json

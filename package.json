@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/butteredcorn/nwhacks2021-backend/issues"
   },
-  "homepage": "https://github.com/butteredcorn/nwhacks2021-backend#readme"
+  "homepage": "https://github.com/butteredcorn/nwhacks2021-backend#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1"
+  }
 }
