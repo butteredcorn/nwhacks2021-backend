@@ -1,23 +1,21 @@
 {
   "name": "swish-eats",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "0.1.0",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/butteredcorn/nwhacks2021-backend.git"
   },
-  "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/butteredcorn/nwhacks2021-backend/issues"
   },
-  "homepage": "https://github.com/butteredcorn/nwhacks2021-backend#readme",
-  "dependencies": {
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1"
-  }
+  "license": "MIT",
+  "homepage": "https://github.com/butteredcorn/nwhacks2021-backend#readme"
 }
