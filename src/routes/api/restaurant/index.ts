@@ -27,7 +27,7 @@ module.exports = (database) => {
       menu
     }
 
-    const result = await database.createRestaurant(newRestaurant)
+    await database.createRestaurant(newRestaurant)
     delete newRestaurant.password
 
     const qrCodes = await createQrBath(tables)
