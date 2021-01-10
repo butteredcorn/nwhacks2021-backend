@@ -1,8 +1,9 @@
 import express from 'express'
 import * as uuid from 'uuid'
-import { CreateRestaurantDto , CreateRestaurant } from '../../../types'
+import { CreateRestaurantDto , CreateRestaurant , Table  } from '../../../types'
 import { getRestaurantInfo } from '../../../helpers/documenu'
 import { extractItems } from '../../../helpers/extractItems'
+import { createQrBath } from '../../../helpers/createQrBatch'
 
 const router = express.Router()
 
@@ -25,9 +26,16 @@ module.exports = (database) => {
       tables,
       menu
     }
-    const result = await database.createRestaurant(newRestaurant)
 
+    await database.createRestaurant(newRestaurant)
     delete newRestaurant.password
+
+    const qrCodes = await createQrBath(tables)
+
+    const tablesQr : Table[] = qrCodes.map(item => ({qr : item}))
+    
+
+    newRestaurant.tables = tablesQr
 
     res.json(newRestaurant)
   })
