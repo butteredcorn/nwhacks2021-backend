@@ -4,7 +4,7 @@ export interface MenuItem {
   price: number
 }
 
-interface Table {
+export interface Table {
   qr: string
 }
 
@@ -13,6 +13,7 @@ export interface CreateRestaurant {
   password: string
   menu: MenuItem[]
   tables: Table[],
+  generatedId? : string
 }
 
 interface OrderItem {
@@ -63,4 +64,8 @@ export interface CreateRestaurantDto{
   documenuId : string,
   tables : number,
   password : string
+}
+
+export interface GetPaymentIdDto{
+  orderId : string
 }

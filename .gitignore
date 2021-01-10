@@ -4,3 +4,4 @@ debug.log
 .DS_Store
 swish-eats-firebase-adminsdk-nxs66-c32dc9b9a9.json
 package-lock.json
+/build

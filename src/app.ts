@@ -13,9 +13,9 @@ export default (database) => {
 
     app.use('/api' , apiRoute)
 
-    // app.get("*", (req, res) => {
-    //   res.sendFile(path.resolve("./public/build", "index.html"));
-    // });
+    app.get("*", (req, res) => {
+      res.sendFile(path.resolve("./public/build", "index.html"));
+    });
 
     return app
 }

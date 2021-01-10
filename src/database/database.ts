@@ -33,6 +33,7 @@ class Database{
 
         return await Promise.all(items)
     }
+
     async createRestaurant(restaurant : CreateRestaurant){
         const password : string = await hash(restaurant.password)
         
@@ -40,6 +41,16 @@ class Database{
             ...restaurant,
             password
         })
+    }
+
+    async getOrder(id : string){
+        return new Promise((resolve , reject) => {
+            const result = this.db.collection('orders').doc(id).get();
+            return result.then(snapshot => {
+                resolve(snapshot.data())
+            })
+            .catch(reject)
+        })       
     }
 
     async placeOrder(order: PlaceOrderDb) {

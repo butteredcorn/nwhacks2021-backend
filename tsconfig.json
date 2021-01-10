@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es2018",
     "lib": ["es2018"],
-    "module": "commonjs",
+    "module": "CommonJs",
     "outDir": "build",
     "esModuleInterop": true,
     "moduleResolution": "node",
@@ -19,7 +19,8 @@
     "allowJs": true
   },
   "include": [
-    "src"
+    "src",
+    "public"
   ],
   "ts-node": {
     "transpileOnly": true
