@@ -20,14 +20,14 @@ class Database{
         this.db = this.admin.firestore()
     }
 
-    async getRestaurants(generatedId : string){
+    async getRestaurant(generatedId : string, returnPassword: boolean = false){
         const snapshot = await this.db.collection('restaurants').where('generatedId' , '==' , generatedId).limit(1).get();
 
         const items : Restaurant[] = []
 
         snapshot.forEach((doc : any) =>{
             const restaurant : Restaurant = doc.data()
-            delete restaurant.password
+            if (!returnPassword) delete restaurant.password
             items.push(restaurant)
         })
 

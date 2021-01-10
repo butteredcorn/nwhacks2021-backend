@@ -9,15 +9,6 @@ export const hash = (password : string) : Promise<string> => {
         });
     })
 }
-export const compare = (password : string , password_hash : string) : Promise<any> => {
-    return new Promise((resolve , reject) => {
-        bcryptCompare(password, password_hash, function(err : Error, result : any) {
-           if(err){
-               reject(err)
-            }else if(!result){
-                reject(new Error('Incorrect password'))
-            }
-            resolve(result)
-        });
-    })
+export const compare = async (password : string , password_hash : string) : Promise<boolean> => {
+    return bcryptCompare(password, password_hash)
 }
