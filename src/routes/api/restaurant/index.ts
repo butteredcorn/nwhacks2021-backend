@@ -1,29 +1,35 @@
 import express from 'express'
 import * as uuid from 'uuid'
-import * as bcrypt from 'bcrypt'
-import { CreateRestaurant } from '../../../types'
+import { CreateRestaurantDto , CreateRestaurant } from '../../../types'
+import { getRestaurantInfo } from '../../../helpers/documenu'
+import { extractItems } from '../../../helpers/extractItems'
 
 const router = express.Router()
 
-export default (database) => {
+module.exports = (database) => {
   router.get('/', (req,res) => {
     res.json({ message: 'restaurant' })
   })
 
   router.post('/create', async (req,res) => {
-    const restaurantData: CreateRestaurant = req.body
+    const restaurantData: CreateRestaurantDto = req.body
+    const documenuId = restaurantData.documenuId 
+    const resturantInfo = await getRestaurantInfo(documenuId)
     const restaurantId = uuid.v4()
-    const password = await bcrypt.hash(restaurantData.password, await bcrypt.genSalt(10))
     const tables = [...Array(restaurantData.tables)].map((_,i) => ({ qr: `${process.env.DOMAIN}/${restaurantId}/${i + 1}` }))
+    const menu = extractItems(resturantInfo.result.menus)
 
-    const result = await database.createRestaurant({
-      ...restaurantData,
-      generatedId: restaurantId,
-      password,
-      tables
-    })
+    const newRestaurant : CreateRestaurant = {
+      name : resturantInfo.result.restaurant_name,
+      password : restaurantData.password,
+      tables,
+      menu
+    }
+    const result = await database.createRestaurant(newRestaurant)
 
-    res.json(result)
+    delete newRestaurant.password
+
+    res.json(newRestaurant)
   })
 
   router.get('/menu', (req,res) => {
