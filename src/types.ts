@@ -14,3 +14,14 @@ export interface CreateRestaurant {
   menu: MenuItem[]
   tables: Table[]
 }
+
+
+export interface Restaurant
+{
+    generatedId: string,
+    tables: Table[],
+    menu: MenuItem[],
+    name: string,
+    password? : string
+}
+    
