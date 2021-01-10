@@ -14,10 +14,18 @@ class Database{
     }
 
     async getRestaurants(generatedId){
-        return await this.db.collection('restaurants').get()
-        // return await this.db.collection("restaurants").where('generatedId', '==', generatedId).limit(1).get();
+        const snapshot = await this.db.collection('restaurants').where('generatedId' , '==' , generatedId).limit(1).get();
+
+        const items = []
+
+        snapshot.forEach(doc =>{
+            const restaurant = doc.data()
+            delete restaurant.password
+            items.push(restaurant)
+        })
+
+        return await Promise.all(items)
     }
-    
 }
 
 const db = new Database()
