@@ -2,7 +2,7 @@ require('dotenv').config()
 const stripe = require('stripe')(process.env['STRIPE_KEY']);
 
 
-export function createStripeSession(amount , restaurantName) : Promise<any> {
+export function createStripeSession(amount , restaurantName , orderId) : Promise<any> {
     return stripe.checkout.sessions.create({
         payment_method_types: ['card'],
         line_items: [
@@ -18,7 +18,7 @@ export function createStripeSession(amount , restaurantName) : Promise<any> {
           },
         ],
         mode: 'payment',
-        success_url: `${process.env.DOMAIN}/payment?success=true`,
-        cancel_url: `${process.env.DOMAIN}/payment?canceled=true`,
+        success_url: `${process.env.DOMAIN}/postpayment?success=true&order =${orderId}`,
+        cancel_url: `${process.env.DOMAIN}/postpayment?canceled=true&order =${orderId}`,
       });
 }

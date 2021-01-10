@@ -17,7 +17,7 @@ export default (database) => {
       const total = Math.ceil(order.total)
       const restaurantName = (await (await order.restaurant.get()).data()).name
       
-      const session = await createStripeSession(total , restaurantName)
+      const session = await createStripeSession(total , restaurantName , orderInfo.orderId)
 
       res.json({id : session.id})
 

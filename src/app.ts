@@ -7,6 +7,14 @@ export default (database) => {
     app.use(express.urlencoded({ extended: false }));
     app.use(express.static('public/build'))
 
+    const cors = require('cors')
+
+    var corsOptions = {
+      origin: 'http://localhost:3000',
+      optionsSuccessStatus: 200
+    }
+    app.use(cors(corsOptions));
+
     app.get('/', (req,res) => {
         res.redirect('/api')
     })
