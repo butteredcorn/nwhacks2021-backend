@@ -1,5 +1,6 @@
 dependencies:
   bcrypt: 5.0.0
+  documenu: 1.1.0
   dotenv: 8.2.0
   express: 4.17.1
   firebase-admin: 9.4.2
@@ -388,6 +389,12 @@ packages:
     optional: true
     resolution:
       integrity: sha512-3duEwti880xqi4eAMN8AyR4a0ByT90zoYdLlevfrvU43vb0YZwZVfxOgxWrLXXXpyugL0hNZc9G6BiB5B3nUug==
+  /axios/0.21.1:
+    dependencies:
+      follow-redirects: 1.13.1
+    dev: false
+    resolution:
+      integrity: sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA==
   /balanced-match/1.0.0:
     resolution:
       integrity: sha1-ibTRmasr7kneFk6gK4nORi1xt2c=
@@ -674,6 +681,12 @@ packages:
       node: '>=0.3.1'
     resolution:
       integrity: sha512-58lmxKSA4BNyLz+HHMUzlOEpg09FV+ev6ZMe3vJihgdxzgcwZ8VoEEPmALCZG9LmqfVoNMMKpttIYTVG6uDY7A==
+  /documenu/1.1.0:
+    dependencies:
+      axios: 0.21.1
+    dev: false
+    resolution:
+      integrity: sha512-0uVPV+1h+7liNC6FZ6hlYb2rLRUfQZlAWm4KOzbDpiQ1/e53wV697w9Z72pHpPoWSrvlwN85Xhntx0c6tDv7xA==
   /dot-prop/5.3.0:
     dependencies:
       is-obj: 2.0.0
@@ -869,6 +882,17 @@ packages:
       '@google-cloud/storage': 5.7.1
     resolution:
       integrity: sha512-mRnBJbW6BAz6DJkZ0GOUTkmnmCrwVzMreMc6O+RXWukFydOzi5Xr6TKSiPKxoOQw41r9IluP2AZ3Qzvlx2SR+g==
+  /follow-redirects/1.13.1:
+    dev: false
+    engines:
+      node: '>=4.0'
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
+    resolution:
+      integrity: sha512-SSG5xmZh1mkPGyKzjZP8zLjltIfpW32Y5QpdNJyjcfGxK3qo3NDDkZOZSFiGn1A6SclQxY9GzEwAHQ3dmYRWpg==
   /forwarded/0.1.2:
     dev: false
     engines:
@@ -2442,6 +2466,7 @@ specifiers:
   '@types/express': ^4.17.9
   '@types/uuid': ^8.3.0
   bcrypt: ^5.0.0
+  documenu: ^1.1.0
   dotenv: ^8.2.0
   express: ^4.17.1
   firebase-admin: ^9.4.2
