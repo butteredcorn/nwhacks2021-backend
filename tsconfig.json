@@ -20,7 +20,8 @@
   },
   "include": [
     "src",
-    "public"
+    "public",
+    "server.ts"
   ],
   "ts-node": {
     "transpileOnly": true
