@@ -1,4 +1,4 @@
-import { CreateRestaurant , Restaurant } from '../types'
+import { CompleteOrder, CreateRestaurant , Order, PlaceOrderDb, Restaurant } from '../types'
 import { hash } from '../helpers/bcrypt'
 
 
@@ -40,6 +40,64 @@ class Database{
             ...restaurant,
             password
         })
+    }
+
+    async placeOrder(order: PlaceOrderDb) {
+        const snapshot = await this.db
+            .collection('restaurants')
+            .where('generatedId', '==', order.restaurantId)
+            .limit(1)
+            .get()
+
+        let refPath: string
+        snapshot.forEach(doc => { refPath = doc.ref.path })
+
+        const docRef = await this.db.collection('orders').add({
+            isActive: true,
+            isPaid: false,
+            items: order.items,
+            restaurant: this.db.doc(refPath),
+            table: Number(order.tableId),
+            time: this.admin.firestore.Timestamp.now(),
+            total: order.items.reduce((acc, { price, quantity }) => Math.round((acc + (price * quantity) * 1.12) * 100) / 100, 0)
+        })
+
+        return docRef.id
+    }
+
+    async getOrders(restaurantId: string) {
+        const snapshot = await this.db
+            .collection('restaurants')
+            .where('generatedId', '==', restaurantId)
+            .limit(1)
+            .get()
+
+        let refPath: string
+        snapshot.forEach(doc => { refPath = doc.ref.path })
+
+        const orderSnapshot = await this.db
+            .collection('orders')
+            .where('restaurant', '==', this.db.doc(refPath))
+            .get()
+
+        let orders: Order[] = []
+        orderSnapshot.forEach(doc => {
+            const order = doc.data()
+            delete order.restaurant
+            order.time = order.time.toDate()
+            orders.push(order)
+        })
+
+        return orders
+    }
+
+    async completeOrder(order: CompleteOrder) {
+        const writeResult = await this.db
+            .collection('orders')
+            .doc(order.orderId)
+            .update({ isActive: false })
+
+        return writeResult.writeTime.toDate()
     }
 }
 

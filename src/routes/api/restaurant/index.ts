@@ -1,12 +1,12 @@
 import express from 'express'
 import * as uuid from 'uuid'
-import { CreateRestaurantDto , CreateRestaurant } from '../../../types'
+import { CreateRestaurantDto , CreateRestaurant, PlaceOrder, CompleteOrder } from '../../../types'
 import { getRestaurantInfo } from '../../../helpers/documenu'
 import { extractItems } from '../../../helpers/extractItems'
 
 const router = express.Router()
 
-module.exports = (database) => {
+export default (database) => {
   router.get('/', (req,res) => {
     res.json({ message: 'restaurant' })
   })
@@ -32,10 +32,29 @@ module.exports = (database) => {
     res.json(newRestaurant)
   })
 
-  router.get('/menu', (req,res) => {
-    const { restaurantId } = req.body
-    // TODO get menu items from documenu with restaurantId from client
-    res.json({ menuItems: ['Steak', 'Burger', 'Fries'] })
+  router.post('/:restaurantId/:tableId/place-order', async (req,res) => {
+    const { restaurantId, tableId } = req.params
+    const { items }: PlaceOrder = req.body
+
+    const orderId = await database.placeOrder({ restaurantId, tableId, items })
+
+    res.json({ orderId })
+  })
+
+  router.get('/:restaurantId/orders', async (req,res) => {
+    const { restaurantId } = req.params
+
+    const orders = await database.getOrders(restaurantId)
+
+    res.json(orders)
+  })
+
+  router.patch('/:orderId/complete-order', async (req,res) => {
+    const { orderId } = req.params
+
+    const completeTime = await database.completeOrder({ orderId })
+
+    res.json({ completeTime })
   })
 
   return router
