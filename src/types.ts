@@ -5,7 +5,9 @@ export interface MenuItem {
 }
 
 export interface Table {
-  qr: string
+  qr: string,
+  restaurantId? : string,
+  tableNumber? : number
 }
 
 export interface CreateRestaurant {
