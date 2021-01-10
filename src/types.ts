@@ -12,5 +12,5 @@ export interface CreateRestaurant {
   name: string
   password: string
   menu: MenuItem[]
-  tables: Table[]
+  tables: number
 }
