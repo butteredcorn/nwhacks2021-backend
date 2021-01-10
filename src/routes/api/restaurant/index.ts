@@ -5,7 +5,7 @@ import { CreateRestaurant } from '../../../types'
 
 const router = express.Router()
 
-module.exports = (database) => {
+export default (database) => {
   router.get('/', (req,res) => {
     res.json({ message: 'restaurant' })
   })

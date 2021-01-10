@@ -1,7 +1,8 @@
-const express = require('express')
+import express from 'express'
+
 const router = express.Router()
 
-module.exports = () => {
+export default (database) => {
   router.get('/', (req,res) => {
     res.json({ message: 'Test purchase route' })
   })

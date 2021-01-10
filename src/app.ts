@@ -1,4 +1,4 @@
-module.exports = (database) => {
+export default (database) => {
     const express = require('express')
     const app = express()
     const apiRoute = require('./routes/api')(database)
