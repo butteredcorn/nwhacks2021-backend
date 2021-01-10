@@ -20,15 +20,6 @@ class Database{
         this.db = this.admin.firestore()
     }
 
-<<<<<<< HEAD:src/database/database.js
-    async getRestaurants(generatedId){
-        const snapshot = await this.db.collection('restaurants').where('generatedId' , '==' , generatedId).limit(1).get();
-
-        const items = []
-
-        snapshot.forEach(doc =>{
-            const restaurant = doc.data()
-=======
     async getRestaurants(generatedId : string){
         const snapshot = await this.db.collection('restaurants').where('generatedId' , '==' , generatedId).limit(1).get();
 
@@ -36,14 +27,11 @@ class Database{
 
         snapshot.forEach((doc : any) =>{
             const restaurant : Restaurant = doc.data()
->>>>>>> main:src/database/database.ts
             delete restaurant.password
             items.push(restaurant)
         })
 
         return await Promise.all(items)
-<<<<<<< HEAD:src/database/database.js
-=======
     }
     async createRestaurant(restaurant : CreateRestaurant){
         const password : string = await hash(restaurant.password)
@@ -52,7 +40,6 @@ class Database{
             ...restaurant,
             password
         })
->>>>>>> main:src/database/database.ts
     }
 }
 
