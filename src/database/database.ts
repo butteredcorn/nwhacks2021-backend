@@ -1,4 +1,4 @@
-import { CompleteOrder, CreateRestaurant, OrderResponse, PlaceOrderDb, Restaurant } from '../types'
+import { CompleteOrder, CreateRestaurant, OrderResponse, PlaceOrderDb, Restaurant , PaidOrder } from '../types'
 import { hash } from '../helpers/bcrypt'
 
 
@@ -108,6 +108,15 @@ class Database{
             .collection('orders')
             .doc(order.orderId)
             .update({ isActive: false })
+
+        return writeResult.writeTime.toDate()
+    }
+
+    async paidOrder(order: PaidOrder) {
+        const writeResult = await this.db
+            .collection('orders')
+            .doc(order.orderId)
+            .update({ isPaid: true })
 
         return writeResult.writeTime.toDate()
     }

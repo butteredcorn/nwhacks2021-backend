@@ -57,6 +57,12 @@ export interface CompleteOrder {
   orderId: string
 }
 
+
+export interface PaidOrder {
+  orderId: string
+}
+
+
 export interface RestaurantAuth {
   password: string
 }
@@ -78,4 +84,9 @@ export interface CreateRestaurantDto{
 
 export interface GetPaymentIdDto{
   orderId : string
+}
+
+export interface PaymentComplete{
+  orderId : string,
+  isPaid : boolean
 }
