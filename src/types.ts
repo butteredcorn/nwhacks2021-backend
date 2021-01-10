@@ -1,4 +1,4 @@
-interface MenuItem {
+export interface MenuItem {
   title: string
   description: string
   price: number
@@ -12,7 +12,7 @@ export interface CreateRestaurant {
   name: string
   password: string
   menu: MenuItem[]
-  tables: number
+  tables: Table[],
 }
 
 
@@ -24,4 +24,9 @@ export interface Restaurant
     name: string,
     password? : string
 }
-    
+
+export interface CreateRestaurantDto{
+  documenuId : string,
+  tables : number,
+  password : string
+}
