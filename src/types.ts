@@ -18,7 +18,7 @@ export interface CreateRestaurant {
 
 export interface Restaurant
 {
-    generatedId: string,
+    generatedId?: string,
     tables: Table[],
     menu: MenuItem[],
     name: string,

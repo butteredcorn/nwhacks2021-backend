@@ -1,4 +1,6 @@
 import { CreateRestaurant , Restaurant } from '../types'
+import { hash } from '../helpers/bcrypt'
+
 
 const path = require('path')
 require('dotenv').config()
@@ -32,7 +34,12 @@ class Database{
         return await Promise.all(items)
     }
     async createRestaurant(restaurant : CreateRestaurant){
+        const password : string = await hash(restaurant.password)
         
+        return this.db.collection('restaurants').add({
+            ...restaurant,
+            password
+        })
     }
 }
 
