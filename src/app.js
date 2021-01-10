@@ -7,6 +7,9 @@ module.exports = (database) => {
     app.use(express.urlencoded({ extended: false }));
     app.use(express.static('public/build'))
 
+    app.get('/', (req,res) => {
+        res.redirect('/api')
+    })
 
     app.use('/api' , apiRoute)
 
@@ -15,4 +18,4 @@ module.exports = (database) => {
     // });
 
     return app
-} 
+}
