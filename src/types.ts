@@ -55,6 +55,10 @@ export interface CompleteOrder {
   orderId: string
 }
 
+export interface RestaurantAuth {
+  password: string
+}
+
 export interface Restaurant
 {
     generatedId?: string,

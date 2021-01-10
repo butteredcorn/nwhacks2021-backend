@@ -1,9 +1,10 @@
 import express from 'express'
 import * as uuid from 'uuid'
-import { CreateRestaurantDto , CreateRestaurant, PlaceOrder, Table } from '../../../types'
+import { CreateRestaurantDto , CreateRestaurant, PlaceOrder, Table, RestaurantAuth, CompleteOrder } from '../../../types'
 import { getRestaurantInfo } from '../../../helpers/documenu'
 import { extractItems } from '../../../helpers/extractItems'
 import { createQrBath } from '../../../helpers/createQrBatch'
+import { compare } from '../../../helpers/bcrypt'
 
 const router = express.Router()
 
@@ -50,20 +51,36 @@ export default function restaurantRoute (database){
     res.json({ orderId })
   })
 
-  router.get('/:restaurantId/orders', async (req,res) => {
+  router.post('/:restaurantId/orders', async (req,res) => {
     const { restaurantId } = req.params
+    const { password }: RestaurantAuth = req.body
+    const [{ password: passwordHash }] = await database.getRestaurant(restaurantId, true)
 
-    const orders = await database.getOrders(restaurantId)
+    const verified = await compare(password, passwordHash)
 
-    res.json(orders)
+    if (verified) {
+      const orders = await database.getOrders(restaurantId)
+      res.json(orders)
+    }
+    else {
+      res.status(401).end()
+    }
   })
 
-  router.patch('/:orderId/complete-order', async (req,res) => {
-    const { orderId } = req.params
+  router.post('/:restaurantId/:orderId/complete-order', async (req,res) => {
+    const { restaurantId, orderId } = req.params
+    const { password }: RestaurantAuth = req.body
+    const [{ password: passwordHash }] = await database.getRestaurant(restaurantId, true)
 
-    const completeTime = await database.completeOrder({ orderId })
+    const verified = await compare(password, passwordHash)
 
-    res.json({ completeTime })
+    if (verified) {
+      const completeTime = await database.completeOrder({ orderId })
+      res.json({ completeTime })
+    }
+    else {
+      res.status(401).end()
+    }
   })
 
   return router
