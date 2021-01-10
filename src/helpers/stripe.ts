@@ -12,7 +12,8 @@ export function createStripeSession(amount , restaurantName , orderId) : Promise
               product_data: {
                 name: `Yum at ${restaurantName} `
               },
-              unit_amount: amount,
+              // convert to cents (smallest currency unit for CAD)
+              unit_amount: amount * 100,
             },
             quantity: 1,
           },
