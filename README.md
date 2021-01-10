@@ -51,3 +51,82 @@
   completeTime: string
 }
 ```
+
+
+### `POST /api/restaurant/create`
+- Body
+```ts
+{
+  documenuId : string,
+  tables : number,
+  password : string
+}
+```
+- Response
+```ts
+{
+  tables: [
+    {
+      qr : BLOB
+    }
+  ]
+  menu: [
+      {
+          description: string,
+          price: number,
+          title: string
+      }
+  ],
+  name: string,
+  generatedId: string
+}
+```
+
+### `POST /api/purchase/`
+- Body
+```ts
+{
+  orderId : string
+}
+```
+- Response
+```ts
+{
+  //Stripe id used to send the user to the payment page
+  id : string
+}
+```
+
+### `POST /api/purchase/completed`
+- Body
+```ts
+{
+  orderId : string,
+  isPaid : bool
+}
+```
+- Response
+
+Returns a `200` status code.
+
+
+## `GET /api/restaurant/[restaurantId]`
+- Response
+```ts
+{
+  tables: [
+    {
+      qr : string
+    }
+  ]
+  menu: [
+      {
+          description: string,
+          price: number,
+          title: string
+      }
+  ],
+  name: string,
+  generatedId: string
+}
+```
