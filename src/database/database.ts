@@ -1,18 +1,26 @@
+import { CreateRestaurant , Restaurant } from '../types'
+import { hash } from '../helpers/bcrypt'
+
+
 const path = require('path')
 require('dotenv').config()
 
 class Database{
+    private db;
+    private admin;
     constructor(){
         this.admin = require("firebase-admin");
 
         var serviceAccount = require(path.join('../../',process.env.FIREBASE_CONFIG));
         
+
         this.admin.initializeApp({
           credential: this.admin.credential.cert(serviceAccount),
         });
         this.db = this.admin.firestore()
     }
 
+<<<<<<< HEAD:src/database/database.js
     async getRestaurants(generatedId){
         const snapshot = await this.db.collection('restaurants').where('generatedId' , '==' , generatedId).limit(1).get();
 
@@ -20,11 +28,31 @@ class Database{
 
         snapshot.forEach(doc =>{
             const restaurant = doc.data()
+=======
+    async getRestaurants(generatedId : string){
+        const snapshot = await this.db.collection('restaurants').where('generatedId' , '==' , generatedId).limit(1).get();
+
+        const items : Restaurant[] = []
+
+        snapshot.forEach((doc : any) =>{
+            const restaurant : Restaurant = doc.data()
+>>>>>>> main:src/database/database.ts
             delete restaurant.password
             items.push(restaurant)
         })
 
         return await Promise.all(items)
+<<<<<<< HEAD:src/database/database.js
+=======
+    }
+    async createRestaurant(restaurant : CreateRestaurant){
+        const password : string = await hash(restaurant.password)
+        
+        return this.db.collection('restaurants').add({
+            ...restaurant,
+            password
+        })
+>>>>>>> main:src/database/database.ts
     }
 }
 
