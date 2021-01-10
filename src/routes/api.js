@@ -11,7 +11,6 @@ module.exports = (database) => {
             res.status(403).json({Error : 'Restaurant id missing.'})
         }
     })
-   
 
     return router
 };

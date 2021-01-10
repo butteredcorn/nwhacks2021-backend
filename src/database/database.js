@@ -15,7 +15,7 @@ class Database{
     }
 
     async getRestaurants(generatedId){
-        const snapshot = await this.db.collection('restaurants').get();
+        const snapshot = await this.db.collection('restaurants').where('generatedId' , '==' , generatedId).limit(1).get();
 
         const items = []
 
