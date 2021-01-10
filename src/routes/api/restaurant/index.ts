@@ -28,7 +28,7 @@ export default function restaurantRoute (database){
     const documenuId = restaurantData.documenuId 
     const resturantInfo = await getRestaurantInfo(documenuId)
     const restaurantId = uuid.v4()
-    const tables = [...Array(restaurantData.tables)].map((_,i) => ({ qr: `${process.env.DOMAIN}/${restaurantId}/${i + 1}` }))
+    const tables : Table[] = [...Array(restaurantData.tables)].map((_,i) => ({ qr: `${restaurantId}/${i + 1}` , restaurantId  , tableNumber : i+1 }))
     const menu = extractItems(resturantInfo.result.menus)
 
     const newRestaurant : CreateRestaurant = {
@@ -38,6 +38,7 @@ export default function restaurantRoute (database){
       menu,
       generatedId : restaurantId
     }
+
 
     await database.createRestaurant(newRestaurant)
     delete newRestaurant.password
