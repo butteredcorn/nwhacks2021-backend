@@ -1,7 +1,8 @@
-const express = require('express')
+import express from 'express'
+import restaurantRoute from './restaurant'
+import purchaseRoute from './purchase'
+
 const router = express.Router()
-const restaurantRoute = require('./restaurant')
-const purchaseRoute = require('./purchase')
 
 module.exports = (database) => {
   router.get('/', async (req,res) => {
