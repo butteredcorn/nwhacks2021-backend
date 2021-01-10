@@ -1,6 +1,6 @@
-import database from './src/database/database'
+import database from './database/database'
 import dotenv from 'dotenv'
-import _app from './src/app'
+import _app from './app'
 
 dotenv.config()
 
