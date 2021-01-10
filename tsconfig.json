@@ -15,7 +15,7 @@
     "noEmitOnError": true,
     "declaration": false,
     "newLine": "lf",
-    "strict": true,
+    "strict": false,
     "allowJs": true
   },
   "include": [
