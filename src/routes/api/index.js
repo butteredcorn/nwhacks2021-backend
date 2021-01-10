@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const restaurantRoute = require('./restaurant')()
-const purchaseRoute = require('./purchase')()
+const restaurantRoute = require('./restaurant')
+const purchaseRoute = require('./purchase')
 
 module.exports = (database) => {
   router.get('/', async (req,res) => {
@@ -20,8 +20,8 @@ module.exports = (database) => {
     }
   })
 
-  router.use('/restaurant', restaurantRoute)
-  router.use('/purchase', purchaseRoute)
+  router.use('/restaurant', restaurantRoute(database))
+  router.use('/purchase', purchaseRoute(database))
 
   return router
 }
