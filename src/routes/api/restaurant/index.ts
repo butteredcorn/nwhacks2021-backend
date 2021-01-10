@@ -13,6 +13,16 @@ export default function restaurantRoute (database){
     res.json({ message: 'restaurant' })
   })
 
+  router.get('/:uuid' ,async (req,res) => {
+    const databaseId = req.params.uuid
+    if (databaseId) {
+      const restaurant = await database.getRestaurant(databaseId)
+      res.json(restaurant)
+    } else {
+      res.status(403).json({Error : 'Restaurant id missing.'})
+    }
+  })
+
   router.post('/create', async (req,res) => {
     const restaurantData: CreateRestaurantDto = req.body
     const documenuId = restaurantData.documenuId 
