@@ -1,7 +1,11 @@
+import { CreateRestaurant , Restaurant } from '../types'
+
 const path = require('path')
 require('dotenv').config()
 
 class Database{
+    private db;
+    private admin;
     constructor(){
         this.admin = require("firebase-admin");
 
@@ -14,18 +18,21 @@ class Database{
         this.db = this.admin.firestore()
     }
 
-    async getRestaurants(generatedId){
+    async getRestaurants(generatedId : string){
         const snapshot = await this.db.collection('restaurants').where('generatedId' , '==' , generatedId).limit(1).get();
 
-        const items = []
+        const items : Restaurant[] = []
 
-        snapshot.forEach(doc =>{
-            const restaurant = doc.data()
+        snapshot.forEach((doc : any) =>{
+            const restaurant : Restaurant = doc.data()
             delete restaurant.password
             items.push(restaurant)
         })
 
         return await Promise.all(items)
+    }
+    async createRestaurant(restaurant : CreateRestaurant){
+        
     }
 }
 
