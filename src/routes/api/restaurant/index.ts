@@ -1,4 +1,6 @@
-const express = require('express')
+import express from 'express'
+import { CreateRestaurant } from '../../../types'
+
 const router = express.Router()
 
 module.exports = () => {
@@ -7,9 +9,9 @@ module.exports = () => {
   })
 
   router.post('/create', (req,res) => {
+    const { name, password, menu, tables }: CreateRestaurant = req.body
     // TODO create new restaurant on firestore
-    const data = req.body
-    res.json({ message: 'Created a new restaurant' })
+    res.json({ name, password, menu, tables })
   })
 
   router.get('/menu', (req,res) => {
