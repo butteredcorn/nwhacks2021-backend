@@ -24,7 +24,8 @@ module.exports = (database) => {
       name : resturantInfo.result.restaurant_name,
       password : restaurantData.password,
       tables,
-      menu
+      menu,
+      generatedId : restaurantId
     }
 
     await database.createRestaurant(newRestaurant)

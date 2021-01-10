@@ -13,6 +13,7 @@ export interface CreateRestaurant {
   password: string
   menu: MenuItem[]
   tables: Table[],
+  generatedId? : string
 }
 
 
@@ -29,4 +30,8 @@ export interface CreateRestaurantDto{
   documenuId : string,
   tables : number,
   password : string
+}
+
+export interface GetPaymentIdDto{
+  orderId : string
 }

@@ -41,6 +41,16 @@ class Database{
             password
         })
     }
+
+    async getOrder(id : string){
+        return new Promise((resolve , reject) => {
+            const result = this.db.collection('orders').doc(id).get();
+            return result.then(snapshot => {
+                resolve(snapshot.data())
+            })
+            .catch(reject)
+        })       
+    }
 }
 
 const db = new Database()
