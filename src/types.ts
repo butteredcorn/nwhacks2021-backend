@@ -22,7 +22,7 @@ interface OrderItem {
   price: number
 }
 
-export interface Order {
+interface Order {
   isActive: boolean
   isPaid: boolean
   items: OrderItem[]
@@ -30,6 +30,10 @@ export interface Order {
   table: number
   time: string
   total: number
+}
+
+export interface OrderResponse extends Order {
+  orderId: string
 }
 
 interface PlaceOrderItem {

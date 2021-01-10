@@ -1,4 +1,4 @@
-import { CompleteOrder, CreateRestaurant , Order, PlaceOrderDb, Restaurant } from '../types'
+import { CompleteOrder, CreateRestaurant, OrderResponse, PlaceOrderDb, Restaurant } from '../types'
 import { hash } from '../helpers/bcrypt'
 
 
@@ -91,11 +91,12 @@ class Database{
             .where('restaurant', '==', this.db.doc(refPath))
             .get()
 
-        let orders: Order[] = []
+        let orders: OrderResponse[] = []
         orderSnapshot.forEach(doc => {
             const order = doc.data()
             delete order.restaurant
             order.time = order.time.toDate()
+            order.orderId = doc.id
             orders.push(order)
         })
 
