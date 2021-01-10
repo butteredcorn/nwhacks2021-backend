@@ -19,7 +19,8 @@
     "allowJs": true
   },
   "include": [
-    "src"
+    "src",
+    "public"
   ],
   "ts-node": {
     "transpileOnly": true

@@ -7,7 +7,7 @@ import { createQrBath } from '../../../helpers/createQrBatch'
 
 const router = express.Router()
 
-module.exports = (database) => {
+export default function restaurantRoute (database){
   router.get('/', (req,res) => {
     res.json({ message: 'restaurant' })
   })
