@@ -4,7 +4,7 @@ export interface MenuItem {
   price: number
 }
 
-interface Table {
+export interface Table {
   qr: string
 }
 
