@@ -16,6 +16,44 @@ export interface CreateRestaurant {
   generatedId? : string
 }
 
+interface OrderItem {
+  title: string
+  quantity: number
+  price: number
+}
+
+interface Order {
+  isActive: boolean
+  isPaid: boolean
+  items: OrderItem[]
+  restaurant: string
+  table: number
+  time: string
+  total: number
+}
+
+export interface OrderResponse extends Order {
+  orderId: string
+}
+
+interface PlaceOrderItem {
+  title: string
+  quantity: number
+  price: number
+}
+
+export interface PlaceOrder {
+  items: PlaceOrderItem[]
+}
+
+export interface PlaceOrderDb extends PlaceOrder {
+  restaurantId: string
+  tableId: number
+}
+
+export interface CompleteOrder {
+  orderId: string
+}
 
 export interface Restaurant
 {
