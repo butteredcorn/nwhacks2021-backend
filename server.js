@@ -1,4 +1,4 @@
-const database = require('./src/database/database.js')
+const database = require('./src/database/database.ts')
 require('dotenv').config()
 
 
